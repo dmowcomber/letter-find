@@ -2,7 +2,10 @@ module github.com/dmowcomber/speak-and-spell
 
 go 1.19
 
-require github.com/mattn/go-tty v0.0.4
+require (
+	github.com/hegedustibor/htgo-tts v0.0.0-20220821045517-04f3cda7a12f
+	github.com/mattn/go-tty v0.0.4
+)
 
 require (
 	github.com/braintree/manners v0.0.0-20160418043613-82a8879fc5fd // indirect
@@ -11,6 +14,8 @@ require (
 	github.com/elazarl/go-bindata-assetfs v1.0.1 // indirect
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
+	github.com/hajimehoshi/go-mp3 v0.3.3 // indirect
+	github.com/hajimehoshi/oto/v2 v2.2.0 // indirect
 	github.com/hashicorp/errwrap v1.0.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/kr/pty v1.1.8 // indirect

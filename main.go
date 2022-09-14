@@ -39,35 +39,57 @@ func main() {
 	// speech.Speak("setup complete")
 
 	log.Println("setup complete")
-	for {
-		select {
-		case ttyRune := <-ttyCh:
-			// log.Println("Key press => " + string(ttyRune))
-			fmt.Println(string(ttyRune))
-			// log.Println("setting up speach-to-text")
-			// speech := htgotts.Speech{Folder: "audio", Language: voices.English, Handler: &handlers.Native{}}
-			// log.Println("speach-to-text setup complete")
-
-			// speech.Speak(string(ttyRune))
-
-			// log.Println("key speech done")
-			err = speak(string(ttyRune))
-			if err != nil {
-				panic(err)
-			}
-
-			// case sig := <-sigCh:
-			// 	switch sig {
-			// 	case os.Interrupt:
-			// 		log.Printf("got signal: %s, closing tty", sig)
-			// 		tty.Close()
-			// 		log.Println("goodbye")
-			// 		return
-			// 	default:
-			// 		log.Printf("got signal: %s, ignoring", sig)
-			// 	}
+	for letter := 'a'; letter <= 'z'; letter++ {
+		err = speak("can you find the letter " + string(letter))
+		if err != nil {
+			panic(err)
 		}
+		// skipUntilRune := rune(-1)
+		for {
+			select {
+			case ttyRune := <-ttyCh:
+				if string(ttyRune) == string(letter) {
+					err = speak(fmt.Sprintf("correct! that was %s!", string(letter)))
+					if err != nil {
+						panic(err)
+					}
+					goto LOOP
+				} else {
+					// TODO: figure out how to drain the channel while speaking. I only care about answers after I talk...
+					err = speak(fmt.Sprintf("no, that was %s. find %s", string(ttyRune), string(letter)))
+					if err != nil {
+						panic(err)
+					}
+				}
+				// log.Println("Key press => " + string(ttyRune))
+				fmt.Println(string(ttyRune))
+				// log.Println("setting up speach-to-text")
+				// speech := htgotts.Speech{Folder: "audio", Language: voices.English, Handler: &handlers.Native{}}
+				// log.Println("speach-to-text setup complete")
+
+				// speech.Speak(string(ttyRune))
+
+				// log.Println("key speech done")
+				// err = speak(string(ttyRune))
+				// if err != nil {
+				// 	panic(err)
+				// }
+
+				// case sig := <-sigCh:
+				// 	switch sig {
+				// 	case os.Interrupt:
+				// 		log.Printf("got signal: %s, closing tty", sig)
+				// 		tty.Close()
+				// 		log.Println("goodbye")
+				// 		return
+				// 	default:
+				// 		log.Printf("got signal: %s, ignoring", sig)
+				// 	}
+			}
+		}
+	LOOP:
 	}
+	speak("Great job! you got all the letters! Now you know your A B Cs!")
 }
 
 func runTTY(tty *tty.TTY, ttyCh chan rune) {

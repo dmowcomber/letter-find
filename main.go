@@ -5,10 +5,12 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"strings"
 	"time"
 
 	"github.com/gdamore/tcell"
 	"github.com/mattn/go-runewidth"
+	"github.com/mbndr/figlet4go"
 )
 
 func main() {
@@ -62,9 +64,27 @@ func main() {
 					eventRune := ev.Rune()
 					// s.SetCell(2, 2, tcell.StyleDefault, '6')
 					w, h := s.Size()
+
+					// Create objects
+					ascii := figlet4go.NewAsciiRender()
+					options := figlet4go.NewRenderOptions()
+
+					// Render the string
+					renderStr, err := ascii.RenderOpts(strings.ToUpper(string(eventRune)), options)
+					if err != nil {
+						log.Fatal(err)
+					}
+					parts := strings.Split(renderStr, "\n")
+					// log.Printf("parts: %d", len(parts))
+
 					s.Clear()
-					// emitStr(s, w/2-7, h/2, style, "Hello, World!")
-					emitStr(s, w/2-7, h/2, style, "Key press => "+string(eventRune))
+					// emitStr(s, w/2-7, h/2-4, style, "Key press => "+string(eventRune))
+
+					startOffset := -4
+					for i := 0; i < len(parts); i++ {
+						emitStr(s, w/2-7, h/2+startOffset, style, parts[i])
+						startOffset++
+					}
 					s.Show()
 					// log.Println("Key press => " + string(eventRune))
 					if string(eventRune) == string(letter) {

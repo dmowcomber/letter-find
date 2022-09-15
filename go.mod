@@ -5,6 +5,7 @@ go 1.19
 require (
 	github.com/gdamore/tcell v1.4.0
 	github.com/mattn/go-runewidth v0.0.13
+	github.com/mbndr/figlet4go v0.0.0-20190224160619-d6cef5b186ea
 )
 
 require (

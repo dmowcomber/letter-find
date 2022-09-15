@@ -1,55 +1,72 @@
-# github.com/braintree/manners v0.0.0-20160418043613-82a8879fc5fd
-## explicit
-# github.com/codegangsta/cli v1.20.0
-## explicit
-# github.com/creack/pty v1.1.7
-## explicit
-# github.com/elazarl/go-bindata-assetfs v1.0.1
-## explicit
-# github.com/fatih/structs v1.1.0
-## explicit
-# github.com/gorilla/websocket v1.5.0
+# github.com/gdamore/encoding v1.0.0
+## explicit; go 1.9
+github.com/gdamore/encoding
+# github.com/gdamore/tcell v1.4.0
 ## explicit; go 1.12
-# github.com/hajimehoshi/go-mp3 v0.3.3
-## explicit; go 1.14
-github.com/hajimehoshi/go-mp3
-github.com/hajimehoshi/go-mp3/internal/bits
-github.com/hajimehoshi/go-mp3/internal/consts
-github.com/hajimehoshi/go-mp3/internal/frame
-github.com/hajimehoshi/go-mp3/internal/frameheader
-github.com/hajimehoshi/go-mp3/internal/huffman
-github.com/hajimehoshi/go-mp3/internal/imdct
-github.com/hajimehoshi/go-mp3/internal/maindata
-github.com/hajimehoshi/go-mp3/internal/sideinfo
-# github.com/hajimehoshi/oto/v2 v2.2.0
-## explicit; go 1.16
-github.com/hajimehoshi/oto/v2
-github.com/hajimehoshi/oto/v2/internal/oboe
-# github.com/hashicorp/errwrap v1.0.0
-## explicit
-# github.com/hashicorp/go-multierror v1.1.1
-## explicit; go 1.13
-# github.com/hegedustibor/htgo-tts v0.0.0-20220821045517-04f3cda7a12f
-## explicit; go 1.17
-github.com/hegedustibor/htgo-tts
-github.com/hegedustibor/htgo-tts/handlers
-github.com/hegedustibor/htgo-tts/voices
-# github.com/kr/pty v1.1.8
+github.com/gdamore/tcell
+github.com/gdamore/tcell/terminfo
+github.com/gdamore/tcell/terminfo/a/adm3a
+github.com/gdamore/tcell/terminfo/a/aixterm
+github.com/gdamore/tcell/terminfo/a/alacritty
+github.com/gdamore/tcell/terminfo/a/ansi
+github.com/gdamore/tcell/terminfo/a/aterm
+github.com/gdamore/tcell/terminfo/b/beterm
+github.com/gdamore/tcell/terminfo/b/bsdos_pc
+github.com/gdamore/tcell/terminfo/base
+github.com/gdamore/tcell/terminfo/c/cygwin
+github.com/gdamore/tcell/terminfo/d/d200
+github.com/gdamore/tcell/terminfo/d/d210
+github.com/gdamore/tcell/terminfo/d/dtterm
+github.com/gdamore/tcell/terminfo/dynamic
+github.com/gdamore/tcell/terminfo/e/emacs
+github.com/gdamore/tcell/terminfo/e/eterm
+github.com/gdamore/tcell/terminfo/extended
+github.com/gdamore/tcell/terminfo/g/gnome
+github.com/gdamore/tcell/terminfo/h/hpterm
+github.com/gdamore/tcell/terminfo/h/hz1500
+github.com/gdamore/tcell/terminfo/k/konsole
+github.com/gdamore/tcell/terminfo/k/kterm
+github.com/gdamore/tcell/terminfo/l/linux
+github.com/gdamore/tcell/terminfo/p/pcansi
+github.com/gdamore/tcell/terminfo/r/rxvt
+github.com/gdamore/tcell/terminfo/s/screen
+github.com/gdamore/tcell/terminfo/s/simpleterm
+github.com/gdamore/tcell/terminfo/s/sun
+github.com/gdamore/tcell/terminfo/t/termite
+github.com/gdamore/tcell/terminfo/t/tvi910
+github.com/gdamore/tcell/terminfo/t/tvi912
+github.com/gdamore/tcell/terminfo/t/tvi921
+github.com/gdamore/tcell/terminfo/t/tvi925
+github.com/gdamore/tcell/terminfo/t/tvi950
+github.com/gdamore/tcell/terminfo/t/tvi970
+github.com/gdamore/tcell/terminfo/v/vt100
+github.com/gdamore/tcell/terminfo/v/vt102
+github.com/gdamore/tcell/terminfo/v/vt220
+github.com/gdamore/tcell/terminfo/v/vt320
+github.com/gdamore/tcell/terminfo/v/vt400
+github.com/gdamore/tcell/terminfo/v/vt420
+github.com/gdamore/tcell/terminfo/v/vt52
+github.com/gdamore/tcell/terminfo/w/wy50
+github.com/gdamore/tcell/terminfo/w/wy60
+github.com/gdamore/tcell/terminfo/w/wy99_ansi
+github.com/gdamore/tcell/terminfo/x/xfce
+github.com/gdamore/tcell/terminfo/x/xnuppc
+github.com/gdamore/tcell/terminfo/x/xterm
+github.com/gdamore/tcell/terminfo/x/xterm_kitty
+# github.com/lucasb-eyer/go-colorful v1.0.3
 ## explicit; go 1.12
-# github.com/mattn/go-isatty v0.0.10
-## explicit; go 1.14
-github.com/mattn/go-isatty
-# github.com/mattn/go-tty v0.0.4
-## explicit; go 1.14
-github.com/mattn/go-tty
-# github.com/yudai/gotty v1.0.1
-## explicit
-# github.com/yudai/hcl v0.0.0-20151013225006-5fa2393b3552
-## explicit
-# github.com/yudai/umutex v0.0.0-20150817080136-18216d265c6b
-## explicit
+github.com/lucasb-eyer/go-colorful
+# github.com/mattn/go-runewidth v0.0.13
+## explicit; go 1.9
+github.com/mattn/go-runewidth
+# github.com/rivo/uniseg v0.2.0
+## explicit; go 1.12
+github.com/rivo/uniseg
 # golang.org/x/sys v0.0.0-20220913175220-63ea55921009
 ## explicit; go 1.17
-golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/unix
-golang.org/x/sys/windows
+# golang.org/x/text v0.3.0
+## explicit
+golang.org/x/text/encoding
+golang.org/x/text/encoding/internal/identifier
+golang.org/x/text/transform

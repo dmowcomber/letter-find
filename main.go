@@ -3,123 +3,98 @@ package main
 import (
 	"fmt"
 	"log"
-	"os"
 	"os/exec"
 	"strings"
 	"time"
 
-	"github.com/gdamore/tcell"
-	"github.com/mattn/go-runewidth"
-	"github.com/mbndr/figlet4go"
+	"fyne.io/fyne/v2"
+	"fyne.io/fyne/v2/app"
+	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/widget"
 )
 
-func main() {
-	s, err := tcell.NewScreen()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "%v\n", err)
-		os.Exit(1)
-	}
-
-	if err = s.Init(); err != nil {
-		fmt.Fprintf(os.Stderr, "%v\n", err)
-		os.Exit(1)
-	}
-	defer func() {
-		s.Fini()
-	}()
-
-	s.SetStyle(tcell.StyleDefault)
-
-	style := tcell.StyleDefault.Foreground(tcell.ColorCadetBlue).Background(tcell.ColorWhite)
-
-	// log.Println("setup complete")
-
-	w, h := s.Size()
-	s.Clear()
-	emitStr(s, w/2-7, h/2, style, "setup complete")
-	s.Show()
-
-	// TODO: randomize letters?
-	for letter := 'a'; letter <= 'z'; letter++ {
-		err = speak("can you find the letter " + string(letter))
-		if err != nil {
-			panic(err)
-		}
-		lastQuestionTime := time.Now()
-
-		for {
-			// TODO: why did the example do this in a goroutine?
-			// https://github.com/gdamore/tcell/blob/22d72263215d7b0298d6d4881053b042192117a7/_demos/cursors.go#L53
-			ev := s.PollEvent()
-			switch ev := ev.(type) {
-			case *tcell.EventKey:
-				switch ev.Key() {
-				case tcell.KeyEscape, tcell.KeyEnter, tcell.KeyCtrlC:
-					return
-				case tcell.KeyRune:
-					if ev.When().Before(lastQuestionTime) {
-						continue // ignore rune keys that were pressed during the question
-					}
-
-					eventRune := ev.Rune()
-					// s.SetCell(2, 2, tcell.StyleDefault, '6')
-					w, h := s.Size()
-
-					// Create objects
-					ascii := figlet4go.NewAsciiRender()
-					options := figlet4go.NewRenderOptions()
-
-					// Render the string
-					renderStr, err := ascii.RenderOpts(strings.ToUpper(string(eventRune)), options)
-					if err != nil {
-						log.Fatal(err)
-					}
-					parts := strings.Split(renderStr, "\n")
-					// log.Printf("parts: %d", len(parts))
-
-					s.Clear()
-					// emitStr(s, w/2-7, h/2-4, style, "Key press => "+string(eventRune))
-
-					startOffset := -4
-					for i := 0; i < len(parts); i++ {
-						emitStr(s, w/2-7, h/2+startOffset, style, parts[i])
-						startOffset++
-					}
-					s.Show()
-					// log.Println("Key press => " + string(eventRune))
-					if string(eventRune) == string(letter) {
-						err = speak(fmt.Sprintf("correct! that was %s!", string(letter)))
-						if err != nil {
-							panic(err)
-						}
-						goto NextLetter
-					} else {
-						err = speak(fmt.Sprintf("no, that was %s. find %s", string(eventRune), string(letter)))
-						if err != nil {
-							panic(err)
-						}
-						lastQuestionTime = time.Now()
-					}
-				}
-			}
-		}
-	NextLetter:
-	}
-	speak("Great job! you got all the letters!")
+type runeEvent struct {
+	char      rune
+	eventTime time.Time
 }
 
-func emitStr(s tcell.Screen, x, y int, style tcell.Style, str string) {
-	for _, c := range str {
-		var comb []rune
-		w := runewidth.RuneWidth(c)
-		if w == 0 {
-			comb = []rune{c}
-			c = ' '
-			w = 1
+func main() {
+	var err error
+	var minWidth float32 = 500.0
+	var minHeight float32 = 500.0
+
+	a := app.New()
+	w := a.NewWindow("Hello")
+	w.SetPadded(false)
+	hello := widget.NewLabel("Letter Find")
+	w.SetContent(container.NewVBox(
+		hello,
+	))
+	w.Resize(fyne.NewSize(minWidth, minHeight))
+
+	// letter := 'A'
+	// lastLetter := 'Z'
+	lastQuestionTime := time.Now()
+	// ignorePrompt := true
+	runeEvents := make(chan *runeEvent, 1000)
+
+	// prompt
+	go func() {
+		for letter := 'A'; letter <= 'Z'; letter++ {
+			hello.SetText("Find the letter")
+			fmt.Println("can you find the letter " + string(letter))
+			err = speak("can you find the letter " + string(letter))
+			if err != nil {
+				panic(err)
+			}
+			lastQuestionTime = time.Now()
+			for {
+				// ignorePrompt = false
+
+				log.Println("fetching input")
+				runeEv := <-runeEvents
+
+				eventRune := runeEv.char
+
+				if runeEv.eventTime.Before(lastQuestionTime.Add(-300 * time.Millisecond)) {
+					hello.SetText("keys pressed during the question are ignored. guess again")
+					continue // ignore rune keys that were pressed during the question
+				}
+
+				hello.SetText(fmt.Sprintf("Last letter: %s", strings.ToUpper(string(eventRune))))
+				if string(eventRune) == strings.ToUpper(string(letter)) ||
+					string(eventRune) == strings.ToLower(string(letter)) {
+					err = speak(fmt.Sprintf("correct! that was %s!", string(letter)))
+					if err != nil {
+						panic(err)
+					}
+					goto nextLetter
+				} else {
+					err = speak(fmt.Sprintf("no, that was %s. find %s", string(eventRune), string(letter)))
+					if err != nil {
+						panic(err)
+					}
+					lastQuestionTime = time.Now()
+					continue
+				}
+			}
+		nextLetter:
 		}
-		s.SetContent(x, y, c, comb, style)
-		x += w
-	}
+		speak("Great job! you got all the letters!")
+	}()
+
+	// input
+	go func() {
+		w.Canvas().SetOnTypedRune(func(char rune) {
+			log.Println("writing input to a chan")
+			runeEvents <- &runeEvent{
+				char:      char,
+				eventTime: time.Now(),
+			}
+		})
+	}()
+
+	w.ShowAndRun()
 }
 
 func speak(text string) error {

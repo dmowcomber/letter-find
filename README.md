@@ -1,8 +1,8 @@
 # letter-find
-Letter Find game to help young kids learn letters
+Letter Find game to help young kids learn the alphabet
 
-# Install the game
+## Install the game
 `go get github.com/dmowcomber/letter-find`
 
-# Run the game
+## Run the game
 `letter-find`

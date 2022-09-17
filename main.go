@@ -4,104 +4,97 @@ import (
 	"fmt"
 	"log"
 	"os/exec"
+	"strings"
+	"time"
 
-	"github.com/mattn/go-tty"
+	"fyne.io/fyne/v2"
+	"fyne.io/fyne/v2/app"
+	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/widget"
 )
 
+type runeEvent struct {
+	char      rune
+	eventTime time.Time
+}
+
 func main() {
+	var err error
+	var minWidth float32 = 500.0
+	var minHeight float32 = 500.0
 
-	tty, err := tty.Open()
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer tty.Close()
+	a := app.New()
+	w := a.NewWindow("Hello")
+	w.SetPadded(false)
+	hello := widget.NewLabel("Letter Find")
+	w.SetContent(container.NewVBox(
+		hello,
+	))
+	w.Resize(fyne.NewSize(minWidth, minHeight))
 
-	log.Println("setting up speach-to-text")
-	// speech := htgotts.Speech{Folder: "audio", Language: voices.English, Handler: &handlers.Native{}}
-	// speech := htgotts.Speech{Folder: "audio", Language: "en"}
+	// letter := 'A'
+	// lastLetter := 'Z'
+	lastQuestionTime := time.Now()
+	// ignorePrompt := true
+	runeEvents := make(chan *runeEvent, 1000)
 
-	// log.Println("saying hello world")
-	// err = speech.Speak("hello, world!")
-	// if err != nil {
-	// panic(err)
-	// }
-	// log.Println("said hello world")
-	// speech.Speak("listening to tty")
+	// prompt
+	go func() {
+		for letter := 'A'; letter <= 'Z'; letter++ {
+			hello.SetText("Find the letter")
+			fmt.Println("can you find the letter " + string(letter))
+			err = speak("can you find the letter " + string(letter))
+			if err != nil {
+				panic(err)
+			}
+			lastQuestionTime = time.Now()
+			for {
+				// ignorePrompt = false
 
-	log.Println("running tty")
-	ttyCh := make(chan rune)
-	runTTY(tty, ttyCh)
+				log.Println("fetching input")
+				runeEv := <-runeEvents
 
-	// log.Println("setting up signal watcher")
-	// sigCh := make(chan os.Signal, 1)
-	// signal.Notify(sigCh, syscall.SIGHUP, syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT, syscall.SIGSEGV)
+				eventRune := runeEv.char
 
-	// speech.Speak("setup complete")
+				if runeEv.eventTime.Before(lastQuestionTime.Add(-300 * time.Millisecond)) {
+					hello.SetText("keys pressed during the question are ignored. guess again")
+					continue // ignore rune keys that were pressed during the question
+				}
 
-	log.Println("setup complete")
-	for letter := 'a'; letter <= 'z'; letter++ {
-		err = speak("can you find the letter " + string(letter))
-		if err != nil {
-			panic(err)
-		}
-		// skipUntilRune := rune(-1)
-		for {
-			select {
-			case ttyRune := <-ttyCh:
-				if string(ttyRune) == string(letter) {
+				hello.SetText(fmt.Sprintf("Last letter: %s", strings.ToUpper(string(eventRune))))
+				if string(eventRune) == strings.ToUpper(string(letter)) ||
+					string(eventRune) == strings.ToLower(string(letter)) {
 					err = speak(fmt.Sprintf("correct! that was %s!", string(letter)))
 					if err != nil {
 						panic(err)
 					}
-					goto LOOP
+					goto nextLetter
 				} else {
-					// TODO: figure out how to drain the channel while speaking. I only care about answers after I talk...
-					err = speak(fmt.Sprintf("no, that was %s. find %s", string(ttyRune), string(letter)))
+					err = speak(fmt.Sprintf("no, that was %s. find %s", string(eventRune), string(letter)))
 					if err != nil {
 						panic(err)
 					}
+					lastQuestionTime = time.Now()
+					continue
 				}
-				// log.Println("Key press => " + string(ttyRune))
-				fmt.Println(string(ttyRune))
-				// log.Println("setting up speach-to-text")
-				// speech := htgotts.Speech{Folder: "audio", Language: voices.English, Handler: &handlers.Native{}}
-				// log.Println("speach-to-text setup complete")
-
-				// speech.Speak(string(ttyRune))
-
-				// log.Println("key speech done")
-				// err = speak(string(ttyRune))
-				// if err != nil {
-				// 	panic(err)
-				// }
-
-				// case sig := <-sigCh:
-				// 	switch sig {
-				// 	case os.Interrupt:
-				// 		log.Printf("got signal: %s, closing tty", sig)
-				// 		tty.Close()
-				// 		log.Println("goodbye")
-				// 		return
-				// 	default:
-				// 		log.Printf("got signal: %s, ignoring", sig)
-				// 	}
 			}
+		nextLetter:
 		}
-	LOOP:
-	}
-	speak("Great job! you got all the letters! Now you know your A B Cs!")
-}
-
-func runTTY(tty *tty.TTY, ttyCh chan rune) {
-	go func() {
-		for {
-			r, err := tty.ReadRune()
-			if err != nil {
-				log.Fatal(err)
-			}
-			ttyCh <- r
-		}
+		speak("Great job! you got all the letters!")
 	}()
+
+	// input
+	go func() {
+		w.Canvas().SetOnTypedRune(func(char rune) {
+			log.Println("writing input to a chan")
+			runeEvents <- &runeEvent{
+				char:      char,
+				eventTime: time.Now(),
+			}
+		})
+	}()
+
+	w.ShowAndRun()
 }
 
 func speak(text string) error {

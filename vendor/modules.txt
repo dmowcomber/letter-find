@@ -1,75 +1,170 @@
-# github.com/gdamore/encoding v1.0.0
-## explicit; go 1.9
-github.com/gdamore/encoding
-# github.com/gdamore/tcell v1.4.0
-## explicit; go 1.12
-github.com/gdamore/tcell
-github.com/gdamore/tcell/terminfo
-github.com/gdamore/tcell/terminfo/a/adm3a
-github.com/gdamore/tcell/terminfo/a/aixterm
-github.com/gdamore/tcell/terminfo/a/alacritty
-github.com/gdamore/tcell/terminfo/a/ansi
-github.com/gdamore/tcell/terminfo/a/aterm
-github.com/gdamore/tcell/terminfo/b/beterm
-github.com/gdamore/tcell/terminfo/b/bsdos_pc
-github.com/gdamore/tcell/terminfo/base
-github.com/gdamore/tcell/terminfo/c/cygwin
-github.com/gdamore/tcell/terminfo/d/d200
-github.com/gdamore/tcell/terminfo/d/d210
-github.com/gdamore/tcell/terminfo/d/dtterm
-github.com/gdamore/tcell/terminfo/dynamic
-github.com/gdamore/tcell/terminfo/e/emacs
-github.com/gdamore/tcell/terminfo/e/eterm
-github.com/gdamore/tcell/terminfo/extended
-github.com/gdamore/tcell/terminfo/g/gnome
-github.com/gdamore/tcell/terminfo/h/hpterm
-github.com/gdamore/tcell/terminfo/h/hz1500
-github.com/gdamore/tcell/terminfo/k/konsole
-github.com/gdamore/tcell/terminfo/k/kterm
-github.com/gdamore/tcell/terminfo/l/linux
-github.com/gdamore/tcell/terminfo/p/pcansi
-github.com/gdamore/tcell/terminfo/r/rxvt
-github.com/gdamore/tcell/terminfo/s/screen
-github.com/gdamore/tcell/terminfo/s/simpleterm
-github.com/gdamore/tcell/terminfo/s/sun
-github.com/gdamore/tcell/terminfo/t/termite
-github.com/gdamore/tcell/terminfo/t/tvi910
-github.com/gdamore/tcell/terminfo/t/tvi912
-github.com/gdamore/tcell/terminfo/t/tvi921
-github.com/gdamore/tcell/terminfo/t/tvi925
-github.com/gdamore/tcell/terminfo/t/tvi950
-github.com/gdamore/tcell/terminfo/t/tvi970
-github.com/gdamore/tcell/terminfo/v/vt100
-github.com/gdamore/tcell/terminfo/v/vt102
-github.com/gdamore/tcell/terminfo/v/vt220
-github.com/gdamore/tcell/terminfo/v/vt320
-github.com/gdamore/tcell/terminfo/v/vt400
-github.com/gdamore/tcell/terminfo/v/vt420
-github.com/gdamore/tcell/terminfo/v/vt52
-github.com/gdamore/tcell/terminfo/w/wy50
-github.com/gdamore/tcell/terminfo/w/wy60
-github.com/gdamore/tcell/terminfo/w/wy99_ansi
-github.com/gdamore/tcell/terminfo/x/xfce
-github.com/gdamore/tcell/terminfo/x/xnuppc
-github.com/gdamore/tcell/terminfo/x/xterm
-github.com/gdamore/tcell/terminfo/x/xterm_kitty
-# github.com/lucasb-eyer/go-colorful v1.0.3
-## explicit; go 1.12
-github.com/lucasb-eyer/go-colorful
-# github.com/mattn/go-runewidth v0.0.13
-## explicit; go 1.9
-github.com/mattn/go-runewidth
-# github.com/mbndr/figlet4go v0.0.0-20190224160619-d6cef5b186ea
+# fyne.io/systray v1.10.1-0.20220621085403-9a2652634e93
+## explicit; go 1.13
+fyne.io/systray
+fyne.io/systray/internal/generated/menu
+fyne.io/systray/internal/generated/notifier
+# github.com/davecgh/go-spew v1.1.1
 ## explicit
-github.com/mbndr/figlet4go
-# github.com/rivo/uniseg v0.2.0
+github.com/davecgh/go-spew/spew
+# github.com/dmowcomber/fyne/v2 v2.0.0-20220916205925-3993ad61972d
+## explicit; go 1.14
+github.com/dmowcomber/fyne/v2
+github.com/dmowcomber/fyne/v2/app
+github.com/dmowcomber/fyne/v2/canvas
+github.com/dmowcomber/fyne/v2/container
+github.com/dmowcomber/fyne/v2/data/binding
+github.com/dmowcomber/fyne/v2/driver/desktop
+github.com/dmowcomber/fyne/v2/driver/mobile
+github.com/dmowcomber/fyne/v2/internal
+github.com/dmowcomber/fyne/v2/internal/animation
+github.com/dmowcomber/fyne/v2/internal/app
+github.com/dmowcomber/fyne/v2/internal/async
+github.com/dmowcomber/fyne/v2/internal/cache
+github.com/dmowcomber/fyne/v2/internal/color
+github.com/dmowcomber/fyne/v2/internal/driver
+github.com/dmowcomber/fyne/v2/internal/driver/common
+github.com/dmowcomber/fyne/v2/internal/driver/glfw
+github.com/dmowcomber/fyne/v2/internal/driver/mobile
+github.com/dmowcomber/fyne/v2/internal/driver/mobile/app
+github.com/dmowcomber/fyne/v2/internal/driver/mobile/app/callfn
+github.com/dmowcomber/fyne/v2/internal/driver/mobile/event/key
+github.com/dmowcomber/fyne/v2/internal/driver/mobile/event/lifecycle
+github.com/dmowcomber/fyne/v2/internal/driver/mobile/event/paint
+github.com/dmowcomber/fyne/v2/internal/driver/mobile/event/size
+github.com/dmowcomber/fyne/v2/internal/driver/mobile/event/touch
+github.com/dmowcomber/fyne/v2/internal/driver/mobile/gl
+github.com/dmowcomber/fyne/v2/internal/driver/mobile/mobileinit
+github.com/dmowcomber/fyne/v2/internal/painter
+github.com/dmowcomber/fyne/v2/internal/painter/gl
+github.com/dmowcomber/fyne/v2/internal/painter/software
+github.com/dmowcomber/fyne/v2/internal/repository
+github.com/dmowcomber/fyne/v2/internal/svg
+github.com/dmowcomber/fyne/v2/internal/test
+github.com/dmowcomber/fyne/v2/internal/widget
+github.com/dmowcomber/fyne/v2/layout
+github.com/dmowcomber/fyne/v2/storage
+github.com/dmowcomber/fyne/v2/storage/repository
+github.com/dmowcomber/fyne/v2/test
+github.com/dmowcomber/fyne/v2/theme
+github.com/dmowcomber/fyne/v2/widget
+# github.com/fredbi/uri v0.0.0-20181227131451-3dcfdacbaaf3
+## explicit
+github.com/fredbi/uri
+# github.com/fsnotify/fsnotify v1.5.4
+## explicit; go 1.16
+github.com/fsnotify/fsnotify
+# github.com/fyne-io/gl-js v0.0.0-20220119005834-d2da28d9ccfe
+## explicit; go 1.14
+github.com/fyne-io/gl-js
+# github.com/fyne-io/glfw-js v0.0.0-20220120001248-ee7290d23504
+## explicit; go 1.14
+github.com/fyne-io/glfw-js
+# github.com/fyne-io/image v0.0.0-20220602074514-4956b0afb3d2
+## explicit; go 1.14
+github.com/fyne-io/image/ico
+# github.com/go-gl/gl v0.0.0-20211210172815-726fda9656d6
 ## explicit; go 1.12
-github.com/rivo/uniseg
+github.com/go-gl/gl/v2.1/gl
+github.com/go-gl/gl/v2.1/gl/KHR
+github.com/go-gl/gl/v3.1/gles2
+github.com/go-gl/gl/v3.1/gles2/KHR
+github.com/go-gl/gl/v3.2-core/gl
+github.com/go-gl/gl/v3.2-core/gl/KHR
+# github.com/go-gl/glfw/v3.3/glfw v0.0.0-20211213063430-748e38ca8aec
+## explicit; go 1.10
+github.com/go-gl/glfw/v3.3/glfw
+github.com/go-gl/glfw/v3.3/glfw/glfw/deps
+github.com/go-gl/glfw/v3.3/glfw/glfw/deps/glad
+github.com/go-gl/glfw/v3.3/glfw/glfw/deps/mingw
+github.com/go-gl/glfw/v3.3/glfw/glfw/deps/vs2008
+github.com/go-gl/glfw/v3.3/glfw/glfw/include/GLFW
+github.com/go-gl/glfw/v3.3/glfw/glfw/src
+# github.com/godbus/dbus/v5 v5.1.0
+## explicit; go 1.12
+github.com/godbus/dbus/v5
+github.com/godbus/dbus/v5/introspect
+github.com/godbus/dbus/v5/prop
+# github.com/goki/freetype v0.0.0-20181231101311-fa8a33aabaff
+## explicit
+github.com/goki/freetype
+github.com/goki/freetype/raster
+github.com/goki/freetype/truetype
+# github.com/gopherjs/gopherjs v1.17.2
+## explicit; go 1.17
+github.com/gopherjs/gopherjs/js
+# github.com/jsummers/gobmp v0.0.0-20151104160322-e2ba15ffa76e
+## explicit
+github.com/jsummers/gobmp
+# github.com/pmezard/go-difflib v1.0.0
+## explicit
+github.com/pmezard/go-difflib/difflib
+# github.com/srwiley/oksvg v0.0.0-20200311192757-870daf9aa564
+## explicit
+github.com/srwiley/oksvg
+# github.com/srwiley/rasterx v0.0.0-20200120212402-85cb7272f5e9
+## explicit
+github.com/srwiley/rasterx
+# github.com/stretchr/testify v1.7.2
+## explicit; go 1.13
+github.com/stretchr/testify/assert
+github.com/stretchr/testify/require
+# github.com/tevino/abool v1.2.0
+## explicit; go 1.14
+github.com/tevino/abool
+# github.com/yuin/goldmark v1.4.0
+## explicit; go 1.15
+github.com/yuin/goldmark
+github.com/yuin/goldmark/ast
+github.com/yuin/goldmark/parser
+github.com/yuin/goldmark/renderer
+github.com/yuin/goldmark/renderer/html
+github.com/yuin/goldmark/text
+github.com/yuin/goldmark/util
+# golang.org/x/image v0.0.0-20220601225756-64ec528b34cd
+## explicit; go 1.12
+golang.org/x/image/colornames
+golang.org/x/image/draw
+golang.org/x/image/font
+golang.org/x/image/math/f64
+golang.org/x/image/math/fixed
+golang.org/x/image/vector
+# golang.org/x/mobile v0.0.0-20211207041440-4e6c2922fdee
+## explicit; go 1.16
+golang.org/x/mobile/exp/f32
+# golang.org/x/net v0.0.0-20210805182204-aaa1db679c0d
+## explicit; go 1.17
+golang.org/x/net/html
+golang.org/x/net/html/atom
+golang.org/x/net/html/charset
 # golang.org/x/sys v0.0.0-20220913175220-63ea55921009
 ## explicit; go 1.17
+golang.org/x/sys/execabs
+golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/unix
-# golang.org/x/text v0.3.0
-## explicit
+golang.org/x/sys/windows
+golang.org/x/sys/windows/registry
+# golang.org/x/text v0.3.7
+## explicit; go 1.17
 golang.org/x/text/encoding
+golang.org/x/text/encoding/charmap
+golang.org/x/text/encoding/htmlindex
+golang.org/x/text/encoding/internal
 golang.org/x/text/encoding/internal/identifier
+golang.org/x/text/encoding/japanese
+golang.org/x/text/encoding/korean
+golang.org/x/text/encoding/simplifiedchinese
+golang.org/x/text/encoding/traditionalchinese
+golang.org/x/text/encoding/unicode
+golang.org/x/text/internal/language
+golang.org/x/text/internal/language/compact
+golang.org/x/text/internal/tag
+golang.org/x/text/internal/utf8internal
+golang.org/x/text/language
+golang.org/x/text/runes
 golang.org/x/text/transform
+# gopkg.in/yaml.v3 v3.0.1
+## explicit
+gopkg.in/yaml.v3
+# honnef.co/go/js/dom v0.0.0-20210725211120-f030747120f2
+## explicit
+honnef.co/go/js/dom
